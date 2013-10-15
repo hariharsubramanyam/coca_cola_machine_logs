@@ -55,7 +55,7 @@ def recursiveLogProcess(startDirectory):
             print "Processing",f
             sys.stdout.flush()
             logProcess(os.path.join(dirpath, f), dirpath[dirpath.rfind('/')+1:])
-            os.system("mongoimport --db testDB --collection freestyleLogs --type tsv --file " + os.path.join(dirpath,f) + " --fields machineID,timeStamp,actionID,subActionID,ingredientID,val2,actionDescription,quantity")
+            os.system("mongoimport --db testDB --collection freestyleLogs --type tsv --file " + os.path.join(dirpath,f) + " --fields type,machineID,timeStamp,actionID,subActionID,ingredientID,val2,actionDescription,quantity")
 # Given a file path with the machine logs and the machine name,
 # Create the
 def logProcess(fpath, machineName):
@@ -72,7 +72,7 @@ def logProcess(fpath, machineName):
         (hours, mins, secs) = (int(timeMatch.group(1)), int(timeMatch.group(2)), int(timeMatch.group(3)))
         dateObj = datetime.datetime(year, month, day, hours, mins, secs)
         replaceMe = split_line[0] + "\t" + split_line[1]
-        line = machineName + "\t" + line.replace(replaceMe, str(int((dateObj - baseTime).total_seconds())))
+        line = "log\t" + machineName + "\t" + line.replace(replaceMe, str(int((dateObj - baseTime).total_seconds())))
         if int(syscmd) == 5042:
             mL = int(description[description.find("Now")+3:description.find("mL")])
             line += "\t" + str(mL)
