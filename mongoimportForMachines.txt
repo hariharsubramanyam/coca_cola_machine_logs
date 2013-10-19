@@ -1,0 +1,1 @@
+mongoimport --db testDB --collection freestyleMachineInfo --type csv --file AllMachinesReadyForImport.csv --fields type,machineID,outlet,legacyACL,address,city,state,country,lat,lng
