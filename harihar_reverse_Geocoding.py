@@ -37,7 +37,7 @@ def parse(infile, outfile):
         address = (split_line[3], split_line[4], split_line[5])
         (lat, lon) =  reverseGeo(address)
         if lon is None:
-            erf.write(line+"\n")
+            erf.write(line)
             continue
         address = split_line[0] + "," + split_line[1] + "," + split_line[2] + "," +  split_line[3] + "," + split_line[4] + "," +  split_line[5]+ "," + split_line[6] + "," + str(lat) + "," + str(lon)
         of.write(address+"\n")
@@ -46,4 +46,5 @@ def parse(infile, outfile):
         sys.stdout.flush()
     of.close()
 
-parse("../Documentation/All_Active_Dispensers_with_Collection_Assignments_02Aug13.csv", "new_Test.csv")
+parse("needToFix.txt", "fixed.txt")
+#parse("FreestyleDispensers.csv", "FreestyleDispensersReadyForImport.csv")
